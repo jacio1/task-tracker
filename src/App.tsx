@@ -1,6 +1,7 @@
 import Card from "./Components/Card";
 import Header from "./Components/Header";
 import Title from "./Components/Title";
+import NewTask from "./Components/NewTask";
 
 function App() {
   const titleData = [
@@ -70,6 +71,7 @@ function App() {
           />
         ))}
       </div>
+      <NewTask/>
     </div>
   );
 }

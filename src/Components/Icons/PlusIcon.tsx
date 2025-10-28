@@ -10,14 +10,14 @@ export default function PlusIcon() {
       <path
         d="M9 1V17"
         stroke="#E7EDFD"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
       <path
         d="M1 9L17 9"
         stroke="#E7EDFD"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );
