@@ -2,8 +2,11 @@ import Card from "./Components/Card";
 import Header from "./Components/Header";
 import Title from "./Components/Title";
 import NewTask from "./Components/NewTask";
+import { useState } from "react";
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const titleData = [
     {
       title: "To do",
@@ -46,9 +49,12 @@ function App() {
     },
   ];
 
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className="px-2.5 max-w-[1220px] mx-auto">
-      <Header />
+      <Header onNewTaskClick={openModal} />
       <div className="flex justify-between">
         {titleData.map((item, index) => (
           <Title
@@ -71,7 +77,8 @@ function App() {
           />
         ))}
       </div>
-      <NewTask/>
+
+      {isModalOpen && <NewTask onClose={closeModal} />}
     </div>
   );
 }

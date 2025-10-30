@@ -10,10 +10,6 @@ button {
   cursor: pointer;
 }
 
-body {
-  background-color: blanchedalmond;
-}
-
-input{
+input {
   outline: none;
 }
