@@ -5,7 +5,7 @@ export default function Card({
 }) {
   return (
     <div
-      className="border-2 w-[392px] p-4 rounded-xl"
+      className="border-2 w-[392px] p-4 rounded-xl flex flex-col gap-4"
       style={{
         backgroundColor: backgroundColor,
         borderColor: borderColor,
@@ -15,9 +15,7 @@ export default function Card({
         className="bg-[#fcfffc] p-6 rounded-xl flex flex-col gap-4 border-2"
         style={{ borderColor: borderColor }}
       >
-        <div className="">
-          <h1 className="text-lg text-[rgba(33,33,38,0.8)]">{title}</h1>
-        </div>
+        <h1 className="text-lg text-[rgba(33,33,38,0.8)]">{title}</h1>
         <p className="text-lg text-[#212126] leading-[1.22]">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam
           ipsam voluptatem facere! Error nihil nemo, odio distinctio laborum

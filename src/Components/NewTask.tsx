@@ -59,7 +59,10 @@ function NewTask({ onClose }: NewTaskProps) {
           </div>
 
           <div className="flex gap-4 pt-8">
-            <button className="border-[#ccced6] border-2 rounded-xl py-4 px-8 w-[169px] h-12 bg-[#f2f3f5] text-xl text-[#000b30] flex items-center justify-center">
+            <button
+              onClick={onClose}
+              className="border-[#ccced6] border-2 rounded-xl py-4 px-8 w-[169px] h-12 bg-[#f2f3f5] text-xl text-[#000b30] flex items-center justify-center"
+            >
               Отменить
             </button>
             <button className="border-[#cec3ff] border-2 rounded-xl py-4 px-8 w-[169px] h-12 bg-[#666d83] text-xl text-[#e7edfd] flex items-center justify-center">
