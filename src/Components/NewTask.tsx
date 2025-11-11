@@ -31,10 +31,9 @@ function NewTask({ onClose }: NewTaskProps) {
           <h2 className="font-medium text-lg text-[#000b30] pt-6">
             Описание задачи
           </h2>
-          <input
-            type="text"
+          <textarea
             placeholder="Введите описание задачи"
-            className="text-black border-[#ccced6] border rounded-lg border-solid py-2.5 px-3.5 w-[354px] h-[197px] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]"
+            className="resize-none text-black border-[#ccced6] border rounded-lg border-solid py-2.5 px-3.5 w-[354px] h-[197px] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]"
           />
           <h2 className="font-medium text-lg text-[#000b30] pt-6">
             Срок исполнения
@@ -47,25 +46,38 @@ function NewTask({ onClose }: NewTaskProps) {
             Приоритет (Выберите один)
           </h2>
           <div className="text-black border-[#ccced6] border rounded-lg border-solid py-2.5 px-3.5 w-[354px] h-[38px] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] flex items-center gap-2">
-            <button className="text-xs text-[#e7edfd] rounded-lg py-1.5 px-3 bg-[#808598] h-[22px] flex items-center">
+            <button
+              type="button"
+              className="text-xs text-[#e7edfd] rounded-lg py-1.5 px-3 bg-[#808598] h-[22px] flex items-center"
+            >
               Средний
             </button>
-            <button className="text-xs text-[#e7edfd] rounded-lg py-1.5 px-3 bg-[#000b30] h-[22px] flex items-center">
+            <button
+              type="button"
+              className="text-xs text-[#e7edfd] rounded-lg py-1.5 px-3 bg-[#000b30] h-[22px] flex items-center"
+            >
               Высокий
             </button>
-            <button className="text-xs text-[#000b3] rounded-lg py-1.5 px-3 bg-[#ccced6] h-[22px] flex items-center">
+            <button
+              type="button"
+              className="text-xs text-[#000b3] rounded-lg py-1.5 px-3 bg-[#ccced6] h-[22px] flex items-center"
+            >
               Низкий
             </button>
           </div>
 
           <div className="flex gap-4 pt-8">
             <button
+              type="button"
               onClick={onClose}
               className="border-[#ccced6] border-2 rounded-xl py-4 px-8 w-[169px] h-12 bg-[#f2f3f5] text-xl text-[#000b30] flex items-center justify-center"
             >
               Отменить
             </button>
-            <button className="border-[#cec3ff] border-2 rounded-xl py-4 px-8 w-[169px] h-12 bg-[#666d83] text-xl text-[#e7edfd] flex items-center justify-center">
+            <button
+              type="button"
+              className="border-[#cec3ff] border-2 rounded-xl py-4 px-8 w-[169px] h-12 bg-[#666d83] text-xl text-[#e7edfd] flex items-center justify-center"
+            >
               Подтвердить
             </button>
           </div>

@@ -1,18 +1,11 @@
-export default function Title({
-  title = "To do",
-  count = 3,
-  backgroundColor = "#000",
-  borderColor = "#fac1d9",
-  countColor = "#ee2f80",
-}) {
+interface TitleProps {
+  title: string;
+  count: number;
+}
+
+export default function Title({ title, count }: TitleProps) {
   return (
-    <div
-      className="border-2 w-[392px] h-[59px] p-4 flex items-center justify-between rounded-xl border-solid"
-      style={{
-        backgroundColor: backgroundColor,
-        borderColor: borderColor,
-      }}
-    >
+    <div className="border-2 w-[392px] h-[59px] p-4 flex items-center justify-between rounded-xl border-solid">
       <h1 className="text-xl font-normal text-[rgba(33,33,38,0.8)]">{title}</h1>
       <p
         className="
@@ -25,7 +18,7 @@ export default function Title({
           leading-[120%]
           text-white
         "
-        style={{ backgroundColor: countColor }}
+        style={{ backgroundColor: "red" }}
       >
         {count}
       </p>
