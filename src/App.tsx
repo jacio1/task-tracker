@@ -1,8 +1,22 @@
+import { useState } from "react";
 import Card from "./Components/Card";
 import Header from "./Components/Header";
 import Title from "./Components/Title";
 
 function App() {
+  const [tasks, setTasks] = useState([
+    {
+      id: 1,
+      title: "task1",
+      text: "text1",
+      date: new Date().toLocaleString("ru-RU", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      }),
+      priority: "low",
+    },
+  ]);
   return (
     <div className="px-2.5 max-w-[1220px] mx-auto">
       <Header />
@@ -12,7 +26,7 @@ function App() {
         <Title title="Done" count={0} />
       </div>
       <div>
-        <Card />
+        <Card tasks={tasks} />
       </div>
     </div>
   );
