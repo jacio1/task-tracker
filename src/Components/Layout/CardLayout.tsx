@@ -4,6 +4,12 @@ import CloseIcon from "../Icons/CloseIcon";
 interface CardLayoutProps {
   children: ReactNode;
 }
+
+interface CardTitleProps {
+  children: ReactNode;
+  onClose?: () => void; // Добавляем опциональный пропс
+}
+
 export const CardLayout = ({ children }: CardLayoutProps) => {
   return (
     <div className="border-2 w-[392px] p-4 rounded-xl flex flex-col gap-4 mt-6 border-[#fac1d9] bg-[#feebf3]">
@@ -20,12 +26,12 @@ export const CardContainer = ({ children }: CardLayoutProps) => {
   );
 };
 
-export const CardTitle = ({ children }: CardLayoutProps) => {
+export const CardTitle = ({ children, onClose }: CardTitleProps) => {
   return (
     <div className="flex items-center justify-between">
-      <h1 className="text-lg text-[rgba(33,33,38,0.8)]">{children}</h1>
-      <button className="w-[23px] h-[23px] bg-[#feebf3] flex items-center justify-center">
-        <CloseIcon/>
+      <h1 className="text-lg text-[rgba(33,33,38,0.8)] wrap-break-word">{children}</h1>
+      <button onClick={onClose} className="w-[23px] h-[23px] bg-[#feebf3] flex items-center justify-center">
+        <CloseIcon />
       </button>
     </div>
   );
@@ -49,7 +55,7 @@ export const CardDate = ({ children }: CardLayoutProps) => {
 
 export const CardPriority = ({ children }: CardLayoutProps) => {
   return (
-    <div className="rounded-lg bg-[#000b30] w-[51px] h-[22px] py-1.5 px-3 text-[#e7edfd] text-xs flex items-center">
+    <div className="rounded-lg bg-[#000b30] w-max h-[22px] py-1.5 px-3 text-[#e7edfd] text-xs flex items-center">
       <p>{children}</p>
     </div>
   );

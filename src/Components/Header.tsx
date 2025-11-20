@@ -1,14 +1,11 @@
-import { useState } from "react";
 import LogoIcon from "./Icons/LogoIcon";
 import PlusIcon from "./Icons/PlusIcon";
-import NewTask from "./NewTask";
 
-export default function Header() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+interface HeaderProps {
+  onOpenModal: () => void;
+}
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
+export default function Header({ onOpenModal }: HeaderProps) {
   return (
     <header className="flex items-center justify-between py-12">
       <div className="flex items-center gap-4">
@@ -17,15 +14,14 @@ export default function Header() {
           TASK Tracker
         </h1>
       </div>
+
       <button
         className="gap-2 border-2 text-[#e7edfd] bg-[#000b30] h-16 w-52 rounded-xl py-4 px-8 flex items-center text-xl font-normal"
-        onClick={openModal}
+        onClick={onOpenModal} // <-- вызываем callback из App
       >
         <PlusIcon />
         Новая задача
       </button>
-
-      {isModalOpen && <NewTask onClose={closeModal} />}
     </header>
   );
 }

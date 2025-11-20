@@ -1,10 +1,56 @@
-import LogoIcon from "./Icons/LogoIcon";
+import { useState } from "react";
+import { Input, Textarea } from "./Input";
+import {
+  NewTaskButton,
+  NewTaskTitle,
+  PrioritySelector,
+  type Priority,
+} from "./Layout/NewTaskLayout";
 
 interface NewTaskProps {
   onClose: () => void;
+  onAddTask: (task: {
+    title: string;
+    text: string;
+    date: string;
+    priority: Priority;
+  }) => void;
 }
 
-function NewTask({ onClose }: NewTaskProps) {
+function NewTask({ onClose, onAddTask }: NewTaskProps) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [deadline, setDeadline] = useState("");
+  const [priority, setPriority] = useState<Priority>("Средний");
+
+  const isValid =
+    title.trim() !== "" && description.trim() !== "" && deadline.trim() !== "";
+
+  const handleSubmit = () => {
+    if (!isValid) return;
+
+    const formattedDate = deadline
+      ? new Date(deadline).toLocaleDateString("ru-RU", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })
+      : new Date().toLocaleDateString("ru-RU", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        });
+
+    onAddTask({
+      title,
+      text: description,
+      date: formattedDate,
+      priority,
+    });
+
+    onClose(); // закрываем модалку
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
@@ -13,73 +59,49 @@ function NewTask({ onClose }: NewTaskProps) {
       ></div>
 
       <div className="relative w-[418px] h-[696px] rounded-xl p-8 bg-white">
-        <div className="flex items-center gap-4">
-          <LogoIcon />
-          <h1 className="font-bold text-2xl leading-[1.12] text-black">
-            Новая задача
-          </h1>
-        </div>
-        <form className="">
-          <h2 className="font-medium text-lg text-[#000b30] pt-8">
-            Название задачи
-          </h2>
-          <input
-            type="text"
+        <NewTaskTitle />
+        <form onSubmit={(e) => e.preventDefault()}>
+          <Input
+            children="Название задачи"
             placeholder="Введите название задачи"
-            className="text-black border-[#ccced6] border rounded-lg border-solid py-2.5 px-3.5 w-[354px] h-11 shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
-          <h2 className="font-medium text-lg text-[#000b30] pt-6">
-            Описание задачи
-          </h2>
-          <textarea
+          <Textarea
+            children="Описание задачи"
             placeholder="Введите описание задачи"
-            className="resize-none text-black border-[#ccced6] border rounded-lg border-solid py-2.5 px-3.5 w-[354px] h-[197px] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
-          <h2 className="font-medium text-lg text-[#000b30] pt-6">
-            Срок исполнения
-          </h2>
-          <input
+          <Input
+            children="Срок выполнения"
             type="date"
-            className="text-black border-[#ccced6] border rounded-lg border-solid py-2.5 px-3.5 w-[354px] h-[38px] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]"
+            value={deadline}
+            onChange={(e) => setDeadline(e.target.value)}
           />
+
           <h2 className="font-medium text-lg text-[#000b30] pt-6">
             Приоритет (Выберите один)
           </h2>
-          <div className="text-black border-[#ccced6] border rounded-lg border-solid py-2.5 px-3.5 w-[354px] h-[38px] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] flex items-center gap-2">
-            <button
-              type="button"
-              className="text-xs text-[#e7edfd] rounded-lg py-1.5 px-3 bg-[#808598] h-[22px] flex items-center"
-            >
-              Средний
-            </button>
-            <button
-              type="button"
-              className="text-xs text-[#e7edfd] rounded-lg py-1.5 px-3 bg-[#000b30] h-[22px] flex items-center"
-            >
-              Высокий
-            </button>
-            <button
-              type="button"
-              className="text-xs text-[#000b3] rounded-lg py-1.5 px-3 bg-[#ccced6] h-[22px] flex items-center"
-            >
-              Низкий
-            </button>
-          </div>
+          <PrioritySelector value={priority} onChange={setPriority} />
 
           <div className="flex gap-4 pt-8">
-            <button
-              type="button"
+            <NewTaskButton
               onClick={onClose}
-              className="border-[#ccced6] border-2 rounded-xl py-4 px-8 w-[169px] h-12 bg-[#f2f3f5] text-xl text-[#000b30] flex items-center justify-center"
-            >
-              Отменить
-            </button>
-            <button
-              type="button"
-              className="border-[#cec3ff] border-2 rounded-xl py-4 px-8 w-[169px] h-12 bg-[#666d83] text-xl text-[#e7edfd] flex items-center justify-center"
-            >
-              Подтвердить
-            </button>
+              children="Отменить"
+              borderColor="border-[#ccced6]"
+              backgroundColor="bg-[#f2f3f5]"
+              textColor="text-[#000b30]"
+            />
+            <NewTaskButton
+              children="Подтвердить"
+              textColor="text-[#e7edfd]"
+              borderColor="border-[#cec3ff]"
+              backgroundColor="bg-[#000b30]"
+              isDisabled={!isValid}
+              onClick={handleSubmit}
+            />
           </div>
         </form>
       </div>
