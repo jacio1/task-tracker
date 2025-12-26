@@ -4,18 +4,8 @@ import {
   NewTaskButton,
   NewTaskTitle,
   PrioritySelector,
-  type Priority,
 } from "./Layout/NewTaskLayout";
-
-interface NewTaskProps {
-  onClose: () => void;
-  onAddTask: (task: {
-    title: string;
-    text: string;
-    date: string;
-    priority: Priority;
-  }) => void;
-}
+import type { NewTaskProps, Priority } from "../types";
 
 function NewTask({ onClose, onAddTask }: NewTaskProps) {
   const [title, setTitle] = useState("");
@@ -48,7 +38,7 @@ function NewTask({ onClose, onAddTask }: NewTaskProps) {
       priority,
     });
 
-    onClose(); // закрываем модалку
+    onClose(); 
   };
 
   return (

@@ -1,3 +1,4 @@
+import type { CardProps } from "../types";
 import {
   CardContainer,
   CardDate,
@@ -7,31 +8,45 @@ import {
   CardTitle,
 } from "./Layout/CardLayout";
 
-interface Task {
-  id: number;
-  title: string;
-  text: string;
-  date: string;
-  priority: string;
-}
-
-interface CardProps {
-  tasks: Task[];
-  onTaskDelete: (taskId: number) => void;
-  onMoveTask?: (taskId: number) => void;
-  moveLabel?: string; // подпись кнопки переноса
-}
-
 export default function Card({
   tasks,
   onTaskDelete,
+  moveOptions,
   onMoveTask,
-  moveLabel,
+  bgColor,
+  borderColor,
 }: CardProps) {
+  const getButtonColors = () => {
+    if (bgColor === "bg-[#feebf3]") {
+      return {
+        firstButton:
+          "text-[#f15a2e] bg-white border-[#f15a2e] hover:bg-[#feefeb]",
+        secondButton:
+          "text-[#00dcb4] bg-white border-[#00dcb4] hover:bg-[#e6fcf8]",
+      };
+    } else if (bgColor === "bg-[#e6fcf8]") {
+      return {
+        firstButton:
+          "text-[#ee2f80] bg-white border-[#ee2f80] hover:bg-[#feebf3]",
+        secondButton:
+          "text-[#f15a2e] bg-white border-[#f15a2e] hover:bg-[#feefeb]",
+      };
+    } else {
+      return {
+        firstButton:
+          "text-[#ee2f80] bg-white border-[#ee2f80] hover:bg-[#feebf3]",
+        secondButton:
+          "text-[#00dcb4] bg-white border-[#00dcb4] hover:bg-[#e6fcf8]",
+      };
+    }
+  };
+
+  const buttonColors = getButtonColors();
+
   return (
-    <CardLayout>
+    <CardLayout bgColor={bgColor} borderColor={borderColor}>
       {tasks.map((task) => (
-        <CardContainer key={task.id}>
+        <CardContainer key={task.id} borderColor={borderColor}>
           <CardTitle onClose={() => onTaskDelete(task.id)}>
             {task.title}
           </CardTitle>
@@ -39,14 +54,22 @@ export default function Card({
           <CardDate>{task.date}</CardDate>
           <CardPriority>{task.priority}</CardPriority>
 
-          {/* Кнопка переноса, если передана */}
-          {onMoveTask && moveLabel && (
-            <button
-              className="mt-2 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-              onClick={() => onMoveTask(task.id)}
-            >
-              {moveLabel}
-            </button>
+          {moveOptions && moveOptions.length > 0 && (
+            <div className="flex justify-center gap-2 mt-4">
+              {moveOptions.map((option, index) => (
+                <button
+                  key={index}
+                  className={`gap-2 border-2 rounded-xl py-3 px-4 flex items-center justify-center text-sm font-normal transition-colors  ${
+                    index === 0
+                      ? buttonColors.firstButton
+                      : buttonColors.secondButton
+                  }`}
+                  onClick={() => onMoveTask(task.id, option.status)}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
           )}
         </CardContainer>
       ))}

@@ -1,6 +1,6 @@
+import type { Priority } from "../../types";
 import LogoIcon from "../Icons/LogoIcon";
 
-export type Priority = "Низкий" | "Средний" | "Высокий";
 
 interface PrioritySelectorProps {
   value: Priority;

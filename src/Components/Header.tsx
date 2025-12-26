@@ -17,7 +17,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
 
       <button
         className="gap-2 border-2 text-[#e7edfd] bg-[#000b30] h-16 w-52 rounded-xl py-4 px-8 flex items-center text-xl font-normal"
-        onClick={onOpenModal} // <-- вызываем callback из App
+        onClick={onOpenModal} 
       >
         <PlusIcon />
         Новая задача
